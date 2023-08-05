@@ -1,5 +1,4 @@
 import { Link, NavLink } from "react-router-dom";
-import accauntIcon from "../../images/icon__COLOR_icon-main.svg";
 import "./Navigation.css";
 
 const isLoggedIn = true;
@@ -8,24 +7,44 @@ function Navigation() {
   return (
     <nav className="navigation">
       <div className="navigation__list">
-        <NavLink to="" className="navigation__link">
+        <NavLink to="" 
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "navigation__link navigation_active" : ""
+          }
+          // className="navigation__link"
+        >
           Главная
         </NavLink>
-        <NavLink to="" className="navigation__link">
+        <NavLink
+          to=""
+          className={({ isActive, isPending }) =>
+            isPending ? "navigation__link" : isActive ? "navigation__link navigation_active" : ""
+          }
+        >
           Фильмы
         </NavLink>
-        <NavLink to="" className="navigation__link">
+        <NavLink
+          to=""
+          className={({ isActive, isPending }) =>
+            isPending ? "navigation__link" : isActive ? "navigation__link navigation_active" : ""
+          }
+        >
           Сохранённые фильмы
         </NavLink>
       </div>
-      <div>
+      <div className="navigation__accaunt">
         {isLoggedIn ? (
           <>
-            <NavLink to="" className="navigation__link">
+            <NavLink
+              to=""
+              className={({ isActive, isPending }) =>
+                isPending ? "navigation__link" : isActive ? "navigation__link navigation_active" : ""
+              }
+            >
               Аккаунт
             </NavLink>
-            <div className="guard"></div>
-            <img src={accauntIcon} alt="Мой аккаунт"></img>
+            <div className="navigation__accaunt-icon"></div>
+            {/* <img src={accauntIcon} alt="Мой аккаунт"></img> */}
           </>
         ) : (
           <>

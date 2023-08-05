@@ -1,0 +1,25 @@
+.promo {
+  background: #073042;
+  box-sizing: border-box;
+  padding: 50px 70px 60px 70px;
+}
+
+.promo__header {
+  max-width: 626px;
+  color: #FFF;
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 52px;
+  letter-spacing: -1.6px;
+  margin: 0;
+}
+
+.promo__decor {
+  width: 722px;
+  height: 244px;
+  background: center no-repeat url(../../images/text__COLOR_landing-logo.svg);
+  margin-top: 102px;
+  margin-left: auto;
+}

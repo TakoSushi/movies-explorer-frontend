@@ -9,6 +9,7 @@
 .navigation__list {
   display: flex;
   gap: 16px;
+  align-items: center;
 }
 
 .navigation__link {
@@ -20,11 +21,23 @@
   line-height: 18px;
 }
 
-.guard {
+.navigation__accaunt {
+  height: 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigation__accaunt-icon {
   position: relative;
   width: 26px;
   height: 26px;
-  flex-shrink: 0;
   border-radius: 50px;
-  background: #313131;
+  background: center no-repeat #313131 url(../../images/icon__COLOR_icon-main.svg);
+}
+
+.navigation_active {
+  font-size: 500;
 }
