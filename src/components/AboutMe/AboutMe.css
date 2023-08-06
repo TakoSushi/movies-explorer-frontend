@@ -15,3 +15,66 @@
   padding-bottom: 23px;
   margin: 0;
 }
+
+.aboutme__data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 66px;
+}
+
+.aboutme__description {
+  max-width: 600px;
+}
+
+.aboutme__name {
+  color: #FFF;
+  font-family: Inter;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 58px;
+  letter-spacing: -2px;
+  margin: 0;
+  }
+
+.aboutme__profession {
+  color: #FFF;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 18px 0 0 0;
+}
+
+.aboutme__biography {
+  color: #FFF;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 26px 0 0 0;
+}
+
+.aboutme__link {
+  text-decoration: none;
+  color: #FFF;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: inline-block;
+  margin: 99px 0 0 0;
+}
+
+.aboutme__photo {
+  max-width: 270px;
+  max-height: 327px;
+  object-fit: cover;
+  border-radius: 10px;
+}

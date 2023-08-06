@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 
 const isLoggedIn = true;
@@ -7,7 +7,7 @@ function Navigation() {
   return (
     <nav className="navigation">
       <div className="navigation__list">
-        <NavLink to="" 
+        <NavLink to="/" 
           className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "navigation__link navigation_active" : ""
           }
@@ -16,7 +16,7 @@ function Navigation() {
           Главная
         </NavLink>
         <NavLink
-          to=""
+          to="/movies"
           className={({ isActive, isPending }) =>
             isPending ? "navigation__link" : isActive ? "navigation__link navigation_active" : ""
           }
@@ -24,7 +24,7 @@ function Navigation() {
           Фильмы
         </NavLink>
         <NavLink
-          to=""
+          to="/saved-movies"
           className={({ isActive, isPending }) =>
             isPending ? "navigation__link" : isActive ? "navigation__link navigation_active" : ""
           }
@@ -36,7 +36,7 @@ function Navigation() {
         {isLoggedIn ? (
           <>
             <NavLink
-              to=""
+              to="/profile"
               className={({ isActive, isPending }) =>
                 isPending ? "navigation__link" : isActive ? "navigation__link navigation_active" : ""
               }
@@ -48,12 +48,12 @@ function Navigation() {
           </>
         ) : (
           <>
-            <Link to="" className="registration__link">
+            <NavLink to="/signup" className="registration__link">
               Регистрация
-            </Link>
-            <button to="" type="button" className="button">
+            </NavLink>
+            <NavLink to="/signin"  className="login__link">
               Войти
-            </button>
+            </NavLink>
           </>
         )}
       </div>

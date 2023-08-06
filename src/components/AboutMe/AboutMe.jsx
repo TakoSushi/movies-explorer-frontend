@@ -19,8 +19,8 @@ function AboutMe() {
           </p>
           <Link className="aboutme__link">Github</Link>
         </article>
+        <img src={autorPhoto} alt="фото автора" className="aboutme__photo" />
       </div>
-      <img src={autorPhoto} alt="фото автора" className="aboutme__photo" />
     </div>
   );
 }

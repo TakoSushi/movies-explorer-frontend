@@ -6,7 +6,7 @@ import "./Header.css";
 function Header() {
   return (
     <header className="header header_colorize">
-      <NavLink to="" className="header__logo_link">
+      <NavLink to="/" className="header__logo_link">
         <img className="header__logo" src={logo} alt="логотип Место" />
       </NavLink>
       <Navigation />
