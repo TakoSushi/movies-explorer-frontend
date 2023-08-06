@@ -1,0 +1,17 @@
+.aboutme {
+  box-sizing: border-box;
+  padding: 100px 70px;
+}
+
+.aboutme__title {
+  color: #fff;
+  font-family: Inter;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  border-bottom: 1px solid #dadada;
+  padding-bottom: 23px;
+  margin: 0;
+}
