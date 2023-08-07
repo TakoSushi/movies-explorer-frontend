@@ -10,25 +10,25 @@ function Techs() {
         дипломном проекте.
       </p>
       <ul className="techs__list">
-        <li className="techs__list-item" key="item1">
+        <li className="techs__list-item">
           HTML
         </li>
-        <li className="techs__list-item" key="item2">
+        <li className="techs__list-item">
           CSS
         </li>
-        <li className="techs__list-item" key="item3">
+        <li className="techs__list-item">
           JS
         </li>
-        <li className="techs__list-item" key="item4">
+        <li className="techs__list-item">
           React
         </li>
-        <li className="techs__list-item" key="item5">
+        <li className="techs__list-item">
           Git
         </li>
-        <li className="techs__list-item" key="item6">
+        <li className="techs__list-item">
           Express.js
         </li>
-        <li className="techs__list-item" key="item7">
+        <li className="techs__list-item">
           mongoDB
         </li>
       </ul>
