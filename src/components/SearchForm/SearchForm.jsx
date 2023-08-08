@@ -1,20 +1,29 @@
 import "./SearchForm.css";
 import { Switcher } from "../Switcher/Switcher";
+import magnifyingGlass from "../../images/left-pointing_magnifying_glass.svg";
 
-function SearchForm () {
+function SearchForm() {
   return (
     <div className="searchform">
-      <div className="searchform__form">
-        <input 
-            className="searchform__input"
-            type="text"
-            placeholder="Search"
+      <form className="searchform__form">
+        <img
+          src={magnifyingGlass}
+          className="searchform__glassicon"
+          alt="Лупа"
         />
-        <button type="button" className="searchform__button">Найти</button>
+        <input
+          className="searchform__input"
+          name="search__input"
+          type="text"
+          placeholder="Фильм"
+          autocomplete="off"
+        />
+        <button className="searchform__button" type="submit">
+          Найти
+        </button>
         <div className="searchform__slice"></div>
-        <Switcher />
-        <span className="searchform__switcher-label">Короткометражки</span>
-      </div>
+        <Switcher labelName={"Короткометражки"} />
+      </form>
     </div>
   );
 }
