@@ -1,62 +1,64 @@
 import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 
-const isLoggedIn = true;
-
 function Navigation() {
+
+  const setActiveMenuClass = ({ isActive }) => 
+  [
+    "menu__item", "navigation__link",
+    isActive ? "navigation__link_active" : "null",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const setActiveAccauntClass = ({ isActive }) => 
+  [
+    "menu__item", "navigation__link", "navigation__link_accaunt",
+    isActive ? "navigation__link_active" : "null",
+  ]
+    .filter(Boolean)
+    .join(" ");
+  
+
+  const handleClick = (e) => {
+    const burgerMenu = document.querySelector(".navigation__hamburger-box");
+
+    burgerMenu.classList.toggle("navigation__hamburger-box_active");
+  }
+
+
   return (
     <nav className="navigation">
-      <div className="navigation__list">
-        <NavLink to="/" 
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "navigation__link navigation_active" : ""
-          }
-          // className="navigation__link"
-        >
-          Главная
-        </NavLink>
-        <NavLink
-          to="/movies"
-          className={({ isActive, isPending }) =>
-            isPending ? "navigation__link" : isActive ? "navigation__link navigation_active" : ""
-          }
-        >
-          Фильмы
-        </NavLink>
-        <NavLink
-          to="/saved-movies"
-          className={({ isActive, isPending }) =>
-            isPending ? "navigation__link" : isActive ? "navigation__link navigation_active" : ""
-          }
-        >
-          Сохранённые фильмы
-        </NavLink>
+      <div className="navigation__hamburger">
+        <input className={"navigation__hamburger-toogle"} name="menu-toggle" type="checkbox" onClick={handleClick}/>
+        <div className={"navigation__hamburger-btn"}>
+          <span></span>
+        </div>
       </div>
-      <div className="navigation__accaunt">
-        {isLoggedIn ? (
-          <>
-            <NavLink
-              to="/profile"
-              className={({ isActive, isPending }) =>
-                isPending ? "navigation__link" : isActive ? "navigation__link navigation_active" : ""
-              }
-            >
+
+      <ul className="navigation__list navigation__hamburger-box">
+        <li>
+          <NavLink to="/" className={setActiveMenuClass}>
+            Главная
+          </NavLink>
+          </li>
+        <li>
+          <NavLink to="/movies" className={setActiveMenuClass}>
+            Фильмы
+          </NavLink>
+          </li>
+        <li>
+          <NavLink to="/saved-movies" className={setActiveMenuClass}>
+            Сохранённые фильмы
+          </NavLink>
+        </li>
+        <li className="navigation__link_position">
+            <NavLink to="/profile" className={setActiveAccauntClass}>
               Аккаунт
+            <span className="navigation__accaunt-icon"></span>
             </NavLink>
-            <div className="navigation__accaunt-icon"></div>
-            {/* <img src={accauntIcon} alt="Мой аккаунт"></img> */}
-          </>
-        ) : (
-          <>
-            <NavLink to="/signup" className="registration__link">
-              Регистрация
-            </NavLink>
-            <NavLink to="/signin"  className="login__link">
-              Войти
-            </NavLink>
-          </>
-        )}
-      </div>
+        </li>
+      </ul>
     </nav>
   );
 }

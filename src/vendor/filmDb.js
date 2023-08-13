@@ -1,0 +1,98 @@
+export const filmsDB = [
+  {
+    imgSrc: "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/6f631486-e947-487d-94d6-41c2b5a8f5a0/1920x",
+    imgName: "33 слова о дизайне",
+    duration: "1ч 42м",
+    key: 1,
+  },
+  {
+    imgSrc: "https://images.firstpost.com/wp-content/uploads/2018/07/POTC-anniversary-1280.jpg",
+    imgName: "Киноальманах «100 лет дизайна»",
+    duration: "1ч 42м",
+    key: 2,
+  },
+  {
+    imgSrc: "https://files.itv.uz/uploads/content/poster/2019/06/07/ea63195b2561500e6189f27bdbc5ae77-q-700x1002.jpeg",
+    imgName: "В погоне за Бенкси",
+    duration: "1ч 42м",
+    key: 3,
+  },
+  {
+    imgSrc: "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/6f631486-e947-487d-94d6-41c2b5a8f5a0/1920x",
+    imgName: "Баския: Взрыв реальности",
+    duration: "1ч 42м",
+    key: 4,
+  },
+  {
+    imgSrc: "https://images.firstpost.com/wp-content/uploads/2018/07/POTC-anniversary-1280.jpg",
+    imgName: "Бег это свобода",
+    duration: "1ч 42м",
+    key: 5,
+  },
+  {
+    imgSrc: "https://files.itv.uz/uploads/content/poster/2019/06/07/ea63195b2561500e6189f27bdbc5ae77-q-700x1002.jpeg",
+    imgName: "Книготорговцы",
+    duration: "1ч 42м",
+    key: 6,
+  },
+  {
+    imgSrc: "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/6f631486-e947-487d-94d6-41c2b5a8f5a0/1920x",
+    imgName: "Когда я думаю о Германии ночью",
+    duration: "1ч 42м",
+    key: 7,
+  },
+  {
+    imgSrc: "https://images.firstpost.com/wp-content/uploads/2018/07/POTC-anniversary-1280.jpg",
+    imgName: "Gimme Danger: История Игги и The Stooges",
+    duration: "1ч 42м",
+    key: 8,
+  },
+  {
+    imgSrc: "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/6f631486-e947-487d-94d6-41c2b5a8f5a0/1920x",
+    imgName: "Дженис: Маленькая девочка грустит",
+    duration: "1ч 42м",
+    key: 9,
+  },
+  {
+    imgSrc: "https://files.itv.uz/uploads/content/poster/2019/06/07/ea63195b2561500e6189f27bdbc5ae77-q-700x1002.jpeg",
+    imgName: "Соберись перед прыжком",
+    duration: "1ч 42м",
+    key: 10,
+  },
+  {
+    imgSrc: "https://files.itv.uz/uploads/content/poster/2019/06/07/ea63195b2561500e6189f27bdbc5ae77-q-700x1002.jpeg",
+    imgName: "Соберись перед прыжком",
+    duration: "1ч 42м",
+    key: 11,
+  },
+  {
+    imgSrc: "https://images.firstpost.com/wp-content/uploads/2018/07/POTC-anniversary-1280.jpg",
+    imgName: "По волнам: Искусство звука в кино",
+    duration: "1ч 42м",
+    key: 12,
+  },
+  {
+    imgSrc: "https://files.itv.uz/uploads/content/poster/2019/06/07/ea63195b2561500e6189f27bdbc5ae77-q-700x1002.jpeg",
+    imgName: "Рудбой",
+    duration: "1ч 42м",
+    key: 13,
+  },
+  {
+    imgSrc: "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/6f631486-e947-487d-94d6-41c2b5a8f5a0/1920x",
+    imgName: "Скейт — кухня",
+    duration: "1ч 42м",
+    key: 14,
+  },
+  {
+    imgSrc: "https://images.firstpost.com/wp-content/uploads/2018/07/POTC-anniversary-1280.jpg",
+    imgName: "Война искусств",
+    duration: "1ч 42м",
+    key: 15,
+  },
+  {
+    imgSrc: "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/6f631486-e947-487d-94d6-41c2b5a8f5a0/1920x",
+    imgName: "Зона",
+    duration: "1ч 42м",
+    key: 16,
+  },
+];

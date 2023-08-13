@@ -29,7 +29,7 @@
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  line-height: 16px;
 }
 
 .footer__list {
@@ -49,5 +49,43 @@
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  line-height: 16px;
+}
+
+@media (max-width: 1006px) {
+  .footer {
+    padding: 79px 30px 20px 30px;
+  }
+}
+
+@media (max-width: 760px) {
+  .footer {
+    padding: 79px 10px 20px 10px;
+  }
+
+  .footer__description {
+    font-size: 12px;
+  }
+
+  .footer__info {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .footer__list {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .footer__copyright {
+    color: #8B8B8B;
+    font-size: 12px;
+  }
+
+  .footer__link {
+    font-size: 12px;
+  }
 }

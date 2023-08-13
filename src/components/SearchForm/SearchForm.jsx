@@ -16,13 +16,13 @@ function SearchForm() {
           name="search__input"
           type="text"
           placeholder="Фильм"
-          autocomplete="off"
+          autoComplete="off"
         />
         <button className="searchform__button" type="submit">
           Найти
         </button>
         <div className="searchform__slice"></div>
-        <Switcher labelName={"Короткометражки"} />
+        <Switcher labelName={"Короткометражки"} className="searchform_switcher" />
       </form>
     </div>
   );
