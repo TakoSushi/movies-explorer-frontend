@@ -4,24 +4,24 @@ import { Link } from "react-router-dom";
 
 function AboutMe() {
   return (
-    <div className="aboutme">
-      <h2 className="aboutme__title">Студент</h2>
-      <div className="aboutme__data">
-        <article className="aboutme__description">
-          <h3 className="aboutme__name">Виталий</h3>
-          <p className="aboutme__profession">Фронтенд-разработчик, 30 лет</p>
-          <p className="aboutme__biography">
+    <section className="about-me">
+      <h2 className="about-me__title">Студент</h2>
+      <div className="about-me__data">
+        <article className="about-me__description">
+          <h3 className="about-me__name">Виталий</h3>
+          <p className="about-me__profession">Фронтенд-разработчик, 30 лет</p>
+          <p className="about-me__biography">
             Я родился и живу в Саратове, закончил факультет экономики СГУ. У
             меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь
             бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ
             Контур». После того, как прошёл курс по веб-разработке, начал
             заниматься фриланс-заказами и ушёл с постоянной работы.
           </p>
-          <Link className="aboutme__link">Github</Link>
+          <Link className="about-me__link">Github</Link>
         </article>
-        <img src={autorPhoto} alt="фото автора" className="aboutme__photo" />
+        <img src={autorPhoto} alt="фото автора" className="about-me__photo" />
       </div>
-    </div>
+    </section>
   );
 }
 

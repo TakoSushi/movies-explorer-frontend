@@ -19,7 +19,7 @@
 
 .authorization__header {
   color: #FFF;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
@@ -43,7 +43,7 @@
 
 .authorization__input-title {
   color: #8B8B8B;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
@@ -54,7 +54,7 @@
 .authorization__input {
   width: 100%;
   color: #FFF;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -84,7 +84,7 @@
 .authorization__error-message {
   display: block;
   color: #EE3465;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
@@ -97,7 +97,7 @@
   height: 45px;
   color: #FFF;
   text-align: center;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -110,14 +110,25 @@
   transition: background-color 0.3s linear;
 }
 
+
 .authorization__button:hover {
   background-color: rgba(66, 133, 244, .8);
+}
+
+.authorization__button_disabled{
+  color: #C2C2C2;
+  background-color: #F8F8F8;
+}
+
+.authorization__button_disabled:hover{
+  color: #C2C2C2;
+  background-color: #F8F8F8;
 }
 
 .authorization__text {
   color: #8B8B8B;
   text-align: center;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

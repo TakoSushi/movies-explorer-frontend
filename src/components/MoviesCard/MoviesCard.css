@@ -10,7 +10,7 @@
 }
 
 .movies-card__title {
-  height: 49px;
+  height: 48px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -21,7 +21,7 @@
 
 .movies-card__img-name {
   color: #FFF;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 13px;
   font-style: normal;
   font-weight: 500;
@@ -49,7 +49,7 @@
 
 .movies-card__duration {
   color: #8B8B8B;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 11px;
   font-style: normal;
   font-weight: 400;

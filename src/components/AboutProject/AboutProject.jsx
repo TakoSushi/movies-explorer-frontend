@@ -2,39 +2,46 @@ import "./AboutProject.css";
 
 function AboutProject() {
   return (
-    <div className="aboutProject">
-      <h2 className="aboutProject__title">О проекте</h2>
-      <div className="aboutProject__context">
-        <section className="aboutProject__article">
-          <h3 className="aboutProject__article-title">
+    <section className="about-project">
+      <h2 className="about-project__title">О проекте</h2>
+      
+      <div className="about-project__context">
+        <article className="about-project__article">
+          <h3 className="about-project__article-title">
             Дипломный проект включал 5 этапов
           </h3>
-          <p className="aboutProject__article-text">
+          <p className="about-project__article-text">
             Составление плана, работу над бэкендом, вёрстку, добавление
             функциональности и финальные доработки.
           </p>
-        </section>
-        <section className="aboutProject__article">
-          <h3 className="aboutProject__article-title">
+        </article>
+        <article className="about-project__article">
+          <h3 className="about-project__article-title">
             На выполнение диплома ушло 5 недель
           </h3>
-          <p className="aboutProject__article-text">
+          <p className="about-project__article-text">
             У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было
             соблюдать, чтобы успешно защититься.
           </p>
-        </section>
+        </article>
       </div>
-      <div className="aboutProject__grid">
-        <div className="aboutProject__cell-header aboutProject__cell-header_left">
-          1 неделя
-        </div>
-        <div className="aboutProject__cell-header aboutProject__cell-header_right">
-          4 недели
-        </div>
-        <div className="aboutProject__cell-content">Back-end</div>
-        <div className="aboutProject__cell-content">Front-end</div>
-      </div>
-    </div>
+
+      <table className="about-project__table">
+        <thead>
+          <tr className="about-project__table-header">
+              <th className="about-project__table-header_left-cell">1 неделя</th>
+              <th>4 недели</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="about-project__table-row">
+            <td>Back-end</td>
+            <td>Front-end</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </section>
   );
 }
 

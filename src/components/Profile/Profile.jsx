@@ -2,7 +2,6 @@ import "./Profile.css";
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Header } from "../Header/Header";
-import { Navigation } from "../Navigation/Navigation";
 
 function Profile () {
   const [name, setName] = useState('Виталий');
@@ -35,9 +34,7 @@ function Profile () {
 
   return (
     <>
-      <Header>
-          <Navigation />
-      </Header>
+      <Header />
       <main className="profile">
         <h2 className="profile__header">Привет, Виталий!</h2>
         <form

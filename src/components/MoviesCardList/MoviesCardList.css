@@ -31,5 +31,6 @@
   .movies-card-list__list {
     grid-template-columns: repeat(1, 300px);
     gap: 34px;
+    padding: 40px 0 10px 0;
   }
 }

@@ -30,8 +30,11 @@ function AuthorizationUser ({ titleText, buttonText, path }) {
                     name="user-name"
                     className="authorization__input authorization__input-name"
                     placeholder="Имя"
+                    minLength="2"
+                    maxLength="40"
+                    required
                 />
-                <span className="authorization__error-message">Что-то покло не так...</span>
+                <span className="authorization__error-message">Что-то пошло не так...</span>
               </>
             }
             <legend className="authorization__input-title">E-mail</legend>
@@ -40,20 +43,26 @@ function AuthorizationUser ({ titleText, buttonText, path }) {
                 name="user-email"
                 className="authorization__input authorization__input-email"
                 placeholder="Почта"
+                minLength="2"
+                maxLength="40"
+                required
             />
-            <span className="authorization__error-message">Что-то покло не так...</span>        
+            <span className="authorization__error-message">Что-то пошло не так...</span>        
             <legend className="authorization__input-title">Пароль</legend>
             <input
                 type="password"
                 name="user-password"
                 className="authorization__input authorization__input-password"
                 placeholder="Пароль"
+                minLength="6"
+                maxLength="200"
+                required
             />
-            <span className="authorization__error-message">Что-то покло не так...</span>
+            <span className="authorization__error-message">Что-то пошло не так...</span>
           </fieldset>
           <button
             type="submit"
-            className="authorization__button"
+            className="authorization__button authorization__button_disabled"
           >
             {buttonText}
           </button>

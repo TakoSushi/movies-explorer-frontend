@@ -5,7 +5,7 @@ function Navigation() {
 
   const setActiveMenuClass = ({ isActive }) => 
   [
-    "menu__item", "navigation__link",
+    "navigation__link",
     isActive ? "navigation__link_active" : "null",
   ]
     .filter(Boolean)
@@ -13,22 +13,28 @@ function Navigation() {
 
   const setActiveAccauntClass = ({ isActive }) => 
   [
-    "menu__item", "navigation__link", "navigation__link_accaunt",
+    "navigation__link", "navigation__link_accaunt",
     isActive ? "navigation__link_active" : "null",
   ]
     .filter(Boolean)
     .join(" ");
-  
+
 
   const handleClick = (e) => {
     const burgerMenu = document.querySelector(".navigation__hamburger-box");
+    const blockLayer = document.querySelector(".navigation__block-layer");
 
+
+    document.body.classList.toggle("stop-scroll");
+    blockLayer.classList.toggle("navigation__block-layer_active");
     burgerMenu.classList.toggle("navigation__hamburger-box_active");
   }
 
 
   return (
     <nav className="navigation">
+      <span className="navigation__block-layer"></span>
+      
       <div className="navigation__hamburger">
         <input className={"navigation__hamburger-toogle"} name="menu-toggle" type="checkbox" onClick={handleClick}/>
         <div className={"navigation__hamburger-btn"}>
@@ -37,7 +43,7 @@ function Navigation() {
       </div>
 
       <ul className="navigation__list navigation__hamburger-box">
-        <li>
+        <li className="navigation__link_unplug">
           <NavLink to="/" className={setActiveMenuClass}>
             Главная
           </NavLink>

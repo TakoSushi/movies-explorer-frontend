@@ -3,9 +3,19 @@ import { Switcher } from "../Switcher/Switcher";
 import magnifyingGlass from "../../images/left-pointing_magnifying_glass.svg";
 
 function SearchForm() {
+  function handleSubmit (e) {
+    e.preventDefault();
+
+  }
+
   return (
-    <div className="searchform">
-      <form className="searchform__form">
+    <section className="searchform">
+      <form
+        name="search-form"
+        className="searchform__form"
+        method="POST"
+        onSubmit={handleSubmit}
+      >
         <img
           src={magnifyingGlass}
           className="searchform__glassicon"
@@ -13,7 +23,7 @@ function SearchForm() {
         />
         <input
           className="searchform__input"
-          name="search__input"
+          name="search-input"
           type="text"
           placeholder="Фильм"
           autoComplete="off"
@@ -24,7 +34,7 @@ function SearchForm() {
         <div className="searchform__slice"></div>
         <Switcher labelName={"Короткометражки"} className="searchform_switcher" />
       </form>
-    </div>
+    </section>
   );
 }
 

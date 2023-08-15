@@ -6,7 +6,7 @@
 
 .profile__header {
   color: #FFF;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
@@ -38,7 +38,7 @@
 .profile__input-title {
   width: 141px;
   color: #FFF;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 11px;
   font-style: normal;
   font-weight: 500;
@@ -49,7 +49,7 @@
   width: 100%;
   text-align: right;
   color: #FFF;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 11px;
   font-style: normal;
   font-weight: 400;
@@ -83,7 +83,7 @@
   display: block;
   color: #FF004C;
   text-align: center;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 11px;
   font-style: normal;
   font-weight: 400;
@@ -96,7 +96,7 @@
   height: 45px;
   color: #FFF;
   text-align: center;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -122,7 +122,7 @@
 
 .profile__text-button {
   text-align: center;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 13px;
   font-style: normal;
   line-height: normal;
