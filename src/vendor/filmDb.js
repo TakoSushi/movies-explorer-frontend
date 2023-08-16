@@ -18,13 +18,13 @@ export const filmsDB = [
     key: 3,
   },
   {
-    imgSrc: "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/6f631486-e947-487d-94d6-41c2b5a8f5a0/1920x",
+    imgSrc: "https://images.firstpost.com/wp-content/uploads/2018/07/POTC-anniversary-1280.jpg",
     imgName: "Баския: Взрыв реальности",
     duration: "1ч 42м",
     key: 4,
   },
   {
-    imgSrc: "https://images.firstpost.com/wp-content/uploads/2018/07/POTC-anniversary-1280.jpg",
+    imgSrc: "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/6f631486-e947-487d-94d6-41c2b5a8f5a0/1920x",
     imgName: "Бег это свобода",
     duration: "1ч 42м",
     key: 5,
