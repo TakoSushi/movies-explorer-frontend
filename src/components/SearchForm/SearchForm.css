@@ -1,0 +1,124 @@
+.searchform {
+  padding: 70px 0 69px 0;
+  border-bottom: 1px solid #424242;
+  margin-bottom: 10px;
+}
+
+.searchform__form {
+  height: 72px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 9px;
+  background-color: #2f2f2f;
+}
+
+.searchform__glassicon {
+  max-width: 34px;
+  margin: 19px 0 19px 19px;
+}
+
+.searchform__input {
+  width: 100%;
+  height: 22px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #8b8b8b;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 0;
+  margin-left: 10px;
+}
+
+.searchform__input::placeholder {
+  transition: opacity .3s ease;
+}
+
+.searchform__input:focus::placeholder {
+  opacity: 0;
+}
+
+.searchform__button {
+  min-width: 58.6px;
+  height: 34px;
+  color: #fff;
+  text-align: center;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  border: none;
+  border-radius: 48px;
+  background: rgba(52, 86, 243, 1);
+  padding: 0;
+  margin-left: 21.35px;
+  transition: 0.2s linear;
+}
+
+.searchform__button:hover {
+  cursor: pointer;
+  background-color: rgba(52, 86, 243, 0.8);
+}
+
+.searchform__slice {
+  width: 1px;
+  height: 40px;
+  background-color: #424242;
+  margin: 0 29px 0 30px;
+}
+
+.searchform_switcher {
+  margin-right: 30px;
+}
+
+
+@media (max-width: 1006px) {
+  .searchform {
+    padding: 80px 0 109px 0;
+  }
+
+  .searchform__slice {
+    margin: 0 19px;
+  }
+
+  .searchform_switcher {
+    margin-right: 20px;
+  }
+}
+
+@media (max-width: 760px) {
+  .searchform {
+    position: relative;
+  }
+
+  .searchform__glassicon {
+    display: none;
+  }
+
+  .searchform__input {
+    font-size: 14px;
+    margin-left: 19px;
+  }
+
+  .searchform__slice {
+    display: none;
+  }
+
+  .searchform__button {
+    margin-right: 19px;
+  }
+
+  .searchform_switcher {
+    position: absolute;
+    top: 197px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin: 0;
+  }
+}

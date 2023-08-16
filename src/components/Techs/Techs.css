@@ -1,0 +1,146 @@
+.techs {
+  background-color: #272727;
+  box-sizing: border-box;
+  padding: 100px 70px 100px 70px;
+}
+
+.techs__title {
+  color: #fff;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -0.88px;
+  border-bottom: 1px solid #dadada;
+  padding-bottom: 23px;
+  margin: 0;
+}
+
+.techs__content-title {
+  color: #fff;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 58px;
+  letter-spacing: -2px;
+  margin: 90px 0 0 0;
+  text-align: center;
+}
+
+.techs__content-text {
+  max-width: 460px;
+  color: #fff;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.56px;
+  margin: 26px auto 0 auto;
+  text-align: center;
+}
+
+.techs__list {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  margin: 100px 0 0 0;
+  padding: 0;
+}
+
+.techs__list-item {
+  width: 90px;
+  height: 60px;
+  background-color: #303030;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.56px;
+}
+
+
+@media (max-width: 880px) {
+  .techs {
+    padding: 90px 50px;
+  }
+
+  .techs__title {
+    padding-top: 2px;
+  }
+
+  .techs__content-title {
+    margin: 80px 0 0 0;
+  }
+
+  .techs__content-text {
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.48px;
+    margin-top: 22px;
+  }
+
+  .techs__list {
+    margin: 83px 0 0 0;
+  }
+
+  .techs__list-item {
+    width: 84px;
+    height: 57px;
+    font-size: 12px;
+    font-style: normal;
+    letter-spacing: -0.48px;
+  }
+}
+
+@media (max-width: 600px) {
+  .techs {
+    padding: 67px 18px 70px 18px;
+  }
+
+  .techs__title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    padding-bottom: 28px;
+  }
+
+  .techs__content-title {
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: -1.12px;
+    margin: 60px 0 0 0;
+  }
+  
+  .techs__content-text {
+    max-width: 380px;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: -0.44px;
+    margin-top: 24px;
+  }
+
+  .techs__list {
+    display: grid;
+    grid-template-columns: repeat(2, 84px);
+    margin-top: 50px;
+  }
+
+  .techs__list-item {
+    width: 84px;
+    height: 57px;
+    font-size: 12px;
+    line-height: normal;
+    letter-spacing: -0.48px;
+  }
+  
+}
