@@ -27,6 +27,17 @@
   opacity: 0.8;
 }
 
+.movies__error-message {
+  color: #EE3465;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+  padding: 10px 150px;
+}
+
 @media (max-width: 1006px) {
   .movies {
     padding: 0 30px;
@@ -40,5 +51,10 @@
 
   .movies__add-films-button {
     width: 240px;
+  }
+
+  .movies__error-message {
+    font-size: 12px;
+    padding: 10px 35px
   }
 }

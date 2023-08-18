@@ -1,12 +1,28 @@
 import "./SearchForm.css";
 import { Switcher } from "../Switcher/Switcher";
 import magnifyingGlass from "../../images/left-pointing_magnifying_glass.svg";
+import { useState } from 'react';
 
-function SearchForm() {
+
+function SearchForm( { onSubmit }) {
+  const [ searchData, setSearchData ] = useState(null);
+  const [ isChecked, setIsChecked ] = useState(false);
+
+  function handleChangeSearchData(e) {
+    setSearchData(e.target.value);
+  }
+
   function handleSubmit (e) {
     e.preventDefault();
 
+    onSubmit({
+      searchData: e.target.value,
+      isChecked: isChecked,
+    });
   }
+
+  function handleChecking
+
 
   return (
     <section className="searchform">
@@ -22,6 +38,8 @@ function SearchForm() {
           alt="Лупа"
         />
         <input
+          value={searchData}
+          onChange={handleChangeSearchData}
           className="searchform__input"
           name="search-input"
           type="text"

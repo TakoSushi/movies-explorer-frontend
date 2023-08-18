@@ -8,7 +8,7 @@ function MoviesCardList ({ movies }) {
       <ul className="movies-card-list__list">
         {movies.map( (movie) => {
           return <MoviesCard  
-            key={movie.key}
+            key={movie.id}
             movie={movie}
           />;
           })
