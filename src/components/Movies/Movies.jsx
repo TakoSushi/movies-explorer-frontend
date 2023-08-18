@@ -5,7 +5,6 @@ import { MoviesCardList } from "../MoviesCardList/MoviesCardList";
 import { Header } from "../Header/Header";
 import { Navigation } from "../Navigation/Navigation";
 import { Footer } from "../Footer/Footer";
-import { Preloader } from "../Preloader/Preloader"
 import movieApi from "../../utils/MoviesApi";
 
 function Movies () {
@@ -13,6 +12,13 @@ function Movies () {
   const [ movies, setMovies] = useState([]);
   const [ isError, setIsError] = useState(false);
   const [ isLoading, setIsLoading] = useState(true);
+  const [ searchData, setSearchData ] = useState(null);
+  const [ isChecked, setIsChecked ] = useState(false);
+
+  function filmFilter(movies, searchData, isChecked) {
+    const filtredMovies = movies;
+    return filtredMovies;
+  }
 
   function handleSubmit() {
     setIsError(false);
@@ -32,6 +38,12 @@ function Movies () {
       })
   }
 
+  function handleFilmInput(searchData) {
+    setSearchData(searchData)
+  }
+
+
+
   function handleClick() {
     console.log (movies);
   }
@@ -42,16 +54,16 @@ function Movies () {
         <Navigation />
       </Header>
       <main className="movies">
-        <SearchForm onSubmit = { handleSubmit } />
-        {
-          isLoading
-            ?  <Preloader />
-            :  isError
-                  ? <p className="movies__error-message">Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз</p>
-                  : movies.length
-                    ? <MoviesCardList movies={ movies } />
-                    : <p className="movies__error-message">Ничего не найдено</p>
-        }
+        <SearchForm
+          onSubmit = { handleSubmit }
+          onInput={handleFilmInput}
+          searchData={searchData}
+        />
+        <MoviesCardList
+          movies={ filmFilter(movies) }
+          isLoading={isLoading}
+          isError={isError}
+        />
         <button
           type="button"
           className="movies__add-films-button"
