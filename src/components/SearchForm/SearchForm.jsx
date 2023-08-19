@@ -1,22 +1,24 @@
 import "./SearchForm.css";
+import { useState } from "react";
 import { Switcher } from "../Switcher/Switcher";
 import magnifyingGlass from "../../images/left-pointing_magnifying_glass.svg";
-import { useState } from 'react';
 
+function SearchForm({ onSubmit }) {
+  const [searchtText, setSearchText] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
 
-function SearchForm( { onSubmit }) {
+  function handleChangeSearchText(e) {
+    setSearchText(e.target.value);
+  }
 
-  // function handleChangeSearchData(e) {
-  //   setSearchData(e.target.value);
-  // }
-
-  function handleSubmit (e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    onSubmit();
-    // onSubmit({
-    //   searchData: e.target.value,
-    //   isChecked: isChecked,
-    // });
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const formJson = Object.fromEntries(formData.entries());
+
+    onSubmit(formJson);
   }
 
   return (
@@ -33,8 +35,8 @@ function SearchForm( { onSubmit }) {
           alt="Лупа"
         />
         <input
-          // value={searchData}
-          // onChange={handleChangeSearchData}
+          value={searchtText}
+          onChange={handleChangeSearchText}
           className="searchform__input"
           name="search-input"
           type="text"
@@ -45,7 +47,11 @@ function SearchForm( { onSubmit }) {
           Найти
         </button>
         <div className="searchform__slice"></div>
-        <Switcher labelName={"Короткометражки"} className="searchform_switcher" />
+        <Switcher
+          labelName={"Короткометражки"}
+          className="searchform_switcher"
+          useChecked={{ isChecked, setIsChecked }}
+        />
       </form>
     </section>
   );

@@ -6,7 +6,7 @@ import { Navigation } from "../Navigation/Navigation";
 import { Footer } from "../Footer/Footer";
 import { filmsLiked } from "../../vendor/filmDb_liked";
 
-function SavedMovies () {
+function SavedMovies() {
   return (
     <>
       <Header>
@@ -14,7 +14,7 @@ function SavedMovies () {
       </Header>
       <main className="saved-movies">
         <SearchForm />
-        <MoviesCardList movies={ filmsLiked } />
+        <MoviesCardList movies={filmsLiked} />
       </main>
       <Footer />
     </>

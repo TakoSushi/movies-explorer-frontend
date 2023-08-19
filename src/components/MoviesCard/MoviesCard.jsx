@@ -1,8 +1,7 @@
 import "./MoviesCard.css";
 import renderTime from "../../utils/renderTime";
 
-function MoviesCard ({ movie }) {
-  
+function MoviesCard({ movie }) {
   return (
     <li>
       <figure className="movies-card">
@@ -12,7 +11,9 @@ function MoviesCard ({ movie }) {
           className="movies-card__img"
         />
         <div className="movies-card__title">
-          <figcaption className="movies-card__img-name">{movie.nameRU}</figcaption>
+          <figcaption className="movies-card__img-name">
+            {movie.nameRU}
+          </figcaption>
           <span className="movies-card__like-icon"></span>
         </div>
         <p className="movies-card__duration">{renderTime(movie.duration)}</p>
