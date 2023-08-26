@@ -3,9 +3,7 @@ import logo from "../../images/logo.svg";
 import { Navigation } from "../Navigation/Navigation";
 import "./Header.css";
 
-function Header( { className }) {
-  
-  const isLoggedIn = true;
+function Header( { className, isLoggedIn }) {
 
   return (
     <header className={`header ${className || ""}`}>

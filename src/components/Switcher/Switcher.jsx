@@ -1,8 +1,8 @@
 import "./Switcher.css";
 
-function Switcher({ className, labelName, useChecked }) {
+function Switcher({ className, labelName, isChecked, onChecked }) {
   function handleChangeCheckbox(e) {
-    useChecked.setIsChecked(e.target.checked);
+    onChecked(e.target.checked)
   }
 
   return (
@@ -11,7 +11,7 @@ function Switcher({ className, labelName, useChecked }) {
         type="checkbox"
         name="search-checkbox"
         className="switcher__checkbox"
-        checked={useChecked.isChecked}
+        checked={isChecked}
         onChange={handleChangeCheckbox}
       />
       <div className="switcher__toogle"></div>

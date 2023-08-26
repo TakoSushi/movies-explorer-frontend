@@ -1,5 +1,3 @@
-// https://api.kuzora-movies.nomoredomains.sbs
-
 class Api {
     constructor({baseUrl, headers}) {
         this._baseUrl = baseUrl;
@@ -13,14 +11,49 @@ class Api {
 
     return Promise.reject(`Ошибка при получении объекта ${res.status}`);
   }
+
+  getMyMovies() {
+    return fetch(`${this._baseUrl}/movies`, {
+        method: 'GET',
+        headers: this._headers,
+        credentials: 'include',
+    })
+    .then((res) => {
+      return this._handlePromise(res);
+    })
+  }
+
+  addNewMovie(movie) {
+    return fetch(`${this._baseUrl}/movies`, {
+        method: 'POST',
+        headers: this._headers,
+        credentials: 'include',
+        body: JSON.stringify(movie),
+    })
+    .then((res) => {
+      return this._handlePromise(res);
+    })
+  }
+
+  deleteMovie(movieId) {
+    return fetch(`${this._baseUrl}/movies/${movieId}`, {
+        method: 'DELETE',
+        headers: this._headers,
+        credentials: 'include',
+    })
+    .then((res) => {
+      return this._handlePromise(res);
+    })
+  }
+
 }
 
-const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-63',
+const myMoviesApi = new Api({
+  baseUrl: 'https://api.kuzora-movies.nomoredomains.sbs',
+  // baseUrl: 'http://localhost:8080',
   headers: {
-    authorization: 'a403427d-ff14-4a62-bf09-33c59e30bcff',
     'Content-Type': 'application/json'
   }
 });
 
-export default api;
+export default myMoviesApi;

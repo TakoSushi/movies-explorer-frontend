@@ -83,6 +83,7 @@
 
 .authorization__error-message {
   display: block;
+  height: 12px;
   color: #EE3465;
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 10px;
@@ -90,6 +91,10 @@
   font-weight: 400;
   line-height: normal;
   padding: 6px 0 5px 0;
+}
+
+.authorization__error-message_center {
+  text-align: center;
 }
 
 .authorization__button {
@@ -118,6 +123,7 @@
 .authorization__button_disabled{
   color: #C2C2C2;
   background-color: #F8F8F8;
+  cursor: default;
 }
 
 .authorization__button_disabled:hover{

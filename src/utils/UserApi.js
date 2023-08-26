@@ -1,4 +1,4 @@
-class Auth {
+class UserApi {
     constructor({baseUrl, headers}) {
         this._baseUrl = baseUrl;
         this._headers = headers;
@@ -12,21 +12,21 @@ class Auth {
     return Promise.reject(`Ошибка при получении объекта ${res.status}`);
   }
 
-  signUp = (newUserData) => {
-    return fetch(`${this._baseUrl}/signup`, {
-        method: 'POST',
+  getUserData = () => {
+    return fetch(`${this._baseUrl}/users/me`, {
+        method: 'GET',
         headers: this._headers,
         credentials: 'include',
-        body: JSON.stringify(newUserData)
+        body: JSON.stringify()
       })
       .then((res) => {
         return this._handlePromise(res);
     })
   }
   
-  signIn = (UserData) => {
-    return fetch(`${this._baseUrl}/signin`, {
-        method: 'POST',
+  changeUserData = (UserData) => {
+    return fetch(`${this._baseUrl}/users/me`, {
+        method: 'PATCH',
         headers: this._headers,
         credentials: 'include',
         body: JSON.stringify(UserData)
@@ -36,23 +36,14 @@ class Auth {
     })
   }
 
-  signOut = () => {
-    return fetch(`${this._baseUrl}/signout`, {
-        method: 'POST',
-        credentials: 'include',
-      })
-      .then((res) => {
-        return this._handlePromise(res);
-    })
-  }
 }
 
-const auth = new Auth({
-  baseUrl: 'https://api.kuzora-movies.nomoredomains.sbs',
+const userApi = new UserApi({
   // baseUrl: 'http://localhost:8080',
+  baseUrl: 'https://api.kuzora-movies.nomoredomains.sbs',
   headers: {
     'Content-Type': 'application/json',
   }
 });
 
-export default auth;
+export default userApi;

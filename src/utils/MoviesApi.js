@@ -13,7 +13,7 @@ class MovieApi {
   }
 
   getInitialsMovies() {
-    return fetch(`${this._baseUrl}`, {
+    return fetch(`${this._baseUrl}/beatfilm-movies`, {
         method: 'GET',
         headers: this._headers,
     })
@@ -23,13 +23,11 @@ class MovieApi {
   }
 }
 
-const movieApi = new MovieApi(
-  {
-    baseUrl: 'https://api.nomoreparties.co/beatfilm-movies',
+const movieApi = new MovieApi({
+    baseUrl: 'https://api.nomoreparties.co',
     headers: {
       'Content-Type': 'application/json',
     }
-  }
-);
+});
 
 export default movieApi;

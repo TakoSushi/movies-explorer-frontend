@@ -1,76 +1,107 @@
 import "./Movies.css";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { SearchForm } from "../SearchForm/SearchForm";
 import { MoviesCardList } from "../MoviesCardList/MoviesCardList";
 import { Header } from "../Header/Header";
 import { Navigation } from "../Navigation/Navigation";
+import { MovieCard } from "../MovieCard/MovieCard";
 import { Footer } from "../Footer/Footer";
-import movieApi from "../../utils/MoviesApi";
+import { useMoviesViewCounter } from "../../utils/useMoviesViewCounter";
+import { getLocalData } from "../../utils/useLocalStorage";
 import filterFilms from "../../utils/filterFilms";
 
-function Movies() {
-  const [movies, setMovies] = useState([]);
+
+function Movies({ isLoggedIn, initialMovies, myMovies, onSubmit, onClickCardLike}) {
+
+  const [filterMovies, setFilterMovies] = useState([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [searchData, setSearchData] = useState(null);
-  const [moviesCounter, setMoviesCounter] = useState(0);
+  const [moviesCounter, setMoviesCounter] = useMoviesViewCounter();
 
   useEffect(() => {
-    // если разрешение экрана 1280px setMoviesCounter({16, 4})
-    // если разрешение экрана 1278px setMoviesCounter({12, 3})
-    // если разрешение экрана 1006px setMoviesCounter({8, 2})
-    // если разрешение экрана 760px setMoviesCounter({5, 2})
-    
-  }, width);
+    if(initialMovies.length){
+    setFilterMovies(filterFilms(
+      initialMovies,
+      getLocalData('movies') || {searchText: "", isChecked: false}
+    ));
+    setIsLoading(false);
+    }
+  }, [initialMovies]);
 
-  function handleMovieView(filterFilms, filmCounter) {
-    if(filterFilms.length > )
+  function handleSearchSubmit() {
+
+    if(!initialMovies.length){
+      setIsLoading(true);
+
+      onSubmit().then((initialMovies) => {
+          setFilterMovies(filterFilms(
+            initialMovies,
+            getLocalData('movies')
+          ));
+        })
+        .catch((err) => {
+          console.warn(err);
+          setIsError(false);
+        })
+        .finally(() => setIsLoading(false));
+    } else {
+      setFilterMovies(filterFilms(
+        initialMovies,
+        getLocalData('movies')
+      ));
+    }
   }
 
-  function handleSubmit(searchData) {
-    setIsError(false);
-    setIsLoading(true);
-
-    setSearchData(searchData);
-
-    movieApi
-      .getInitialsMovies()
-      .then((initialMovies) => {
-        setMovies(initialMovies);
-        setIsError(false);
-      })
-      .catch((err) => {
-        setIsError(true);
-        console.warn(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+  function handleChecked() {
+    setFilterMovies(filterFilms(
+      initialMovies,
+      getLocalData('movies')
+    ));
   }
 
-  function handleClick() {
-    console.log(movies);
+  function handleAddBtnClick () {
+    const addMovies = moviesCounter.addMovies;
+    const displayMovies = moviesCounter.displayMovies + addMovies;
+    setMoviesCounter({ displayMovies, addMovies })
   }
 
   return (
     <>
-      <Header>
+      <Header isLoggedIn={isLoggedIn} >
         <Navigation />
       </Header>
       <main className="movies">
-        <SearchForm onSubmit={handleSubmit} />
+        <SearchForm
+          onSubmit={handleSearchSubmit}
+          onChecked={handleChecked}
+          localStorageKey={'movies'}
+        />
         <MoviesCardList
-          movies={filterFilms(movies, searchData)}
+          movies={(filterMovies)}
           isLoading={isLoading}
           isError={isError}
-        />
-        <button
-          type="button"
-          className="movies__add-films-button"
-          onClick={handleClick}
         >
-          Ещё
-        </button>
+          {(filterMovies).slice(0, moviesCounter.displayMovies).map((movie) => {
+            return <MovieCard
+              key={movie.id}
+              movie={movie}
+              poster={`https://api.nomoreparties.co${movie.image.url}`}
+              onClickCardLike={onClickCardLike}
+              className={myMovies.find((myMovie) => myMovie.movieId === movie.id) ? "movie-card__handle-icon_like-active" : "movie-card__handle-icon_like-unactive"}
+            />;
+            })
+          }
+        </MoviesCardList>
+        { filterMovies.length > moviesCounter.displayMovies
+          ? <button
+              type="button"
+              className="movies__add-films-button"
+              onClick={handleAddBtnClick}
+            >
+              Ещё
+            </button>
+          : <></>
+        }
       </main>
       <Footer />
     </>

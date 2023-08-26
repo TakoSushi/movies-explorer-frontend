@@ -1,19 +1,18 @@
-export default function filterFilms(movies, searchData) {
-  if (!searchData) {
-    return movies;
+export default function filterFilms(movies, { searchText, isChecked }) {
+  
+  let filtredMovies = movies;
+
+  if (isChecked){
+    filtredMovies = filtredMovies.filter((movie) => movie.duration <= 40);
   }
 
-  const text = searchData["search-input"].toLowerCase();
-  const checkbox = searchData["search-checkbox"];
+  if (!searchText) {
+    return filtredMovies;
+  }
 
-  const filtredMovies = movies.filter((movie) => {
-    return (
-      movie.nameRU.toLowerCase().includes(text) ||
-      movie.nameEN.toLowerCase().includes(text)
-    );
-  });
-
-  return checkbox
-    ? filtredMovies.filter((movie) => movie.duration <= 40)
-    : filtredMovies;
+  return filtredMovies.filter((movie) => {
+    return  movie.nameRU.toLowerCase().includes(searchText.toLowerCase()) ||
+      movie.nameEN.toLowerCase().includes(searchText.toLowerCase())
+    }
+  );
 }

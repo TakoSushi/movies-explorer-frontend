@@ -1,24 +1,41 @@
 import "./SearchForm.css";
 import { useState } from "react";
-import { Switcher } from "../Switcher/Switcher";
 import magnifyingGlass from "../../images/left-pointing_magnifying_glass.svg";
+import { Switcher } from "../Switcher/Switcher";
+import { setLocalData, getLocalData } from "../../utils/useLocalStorage";
 
-function SearchForm({ onSubmit }) {
-  const [searchtText, setSearchText] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
+
+function SearchForm({ onSubmit, onChecked, localStorageKey}) {
+  const [searchText, setSearchText] = useState(getLocalData(localStorageKey)
+  ? getLocalData(localStorageKey).searchText || ''
+  : '');
+  const [isChecked, setIsChecked] = useState(getLocalData(localStorageKey)
+  ? getLocalData(localStorageKey).isChecked || false
+  : false);
 
   function handleChangeSearchText(e) {
     setSearchText(e.target.value);
   }
 
+  function handleChecked(isChecked) {
+    setLocalData(localStorageKey, {
+      ...getLocalData(localStorageKey),
+      'isChecked': isChecked
+    });
+
+    setIsChecked(isChecked);
+    onChecked();
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
-    const form = e.target;
-    const formData = new FormData(form);
-    const formJson = Object.fromEntries(formData.entries());
+    setLocalData(localStorageKey, {
+      ...getLocalData(localStorageKey),
+      'searchText': searchText
+    });
 
-    onSubmit(formJson);
+    onSubmit();
   }
 
   return (
@@ -35,7 +52,7 @@ function SearchForm({ onSubmit }) {
           alt="Лупа"
         />
         <input
-          value={searchtText}
+          value={searchText}
           onChange={handleChangeSearchText}
           className="searchform__input"
           name="search-input"
@@ -50,7 +67,8 @@ function SearchForm({ onSubmit }) {
         <Switcher
           labelName={"Короткометражки"}
           className="searchform_switcher"
-          useChecked={{ isChecked, setIsChecked }}
+          isChecked={isChecked}
+          onChecked={handleChecked}
         />
       </form>
     </section>
