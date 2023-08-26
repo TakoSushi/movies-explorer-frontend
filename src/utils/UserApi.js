@@ -39,7 +39,6 @@ class UserApi {
 }
 
 const userApi = new UserApi({
-  // baseUrl: 'http://localhost:8080',
   baseUrl: 'https://api.kuzora-movies.nomoredomains.sbs',
   headers: {
     'Content-Type': 'application/json',
