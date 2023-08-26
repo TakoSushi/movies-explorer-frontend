@@ -11,10 +11,10 @@ import { Profile } from "../Profile/Profile";
 import { Login } from "../Login/Login";
 import { Register } from "../Register/Register";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
-import auth from "../../utils/Auth";
-import userApi from "../../utils/UserApi";
-import myMovieApi from "../../utils/MainApi";
-import movieApi from "../../utils/MoviesApi";
+import auth from "../../utils/Auth.js";
+import userApi from "../../utils/UserApi.js";
+import myMovieApi from "../../utils/MainApi.js";
+import movieApi from "../../utils/MoviesApi.js";
 
 
 function App() {
