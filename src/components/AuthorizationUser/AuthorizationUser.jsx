@@ -1,12 +1,32 @@
 import "./AuthorizationUser.css";
-import { NavLink } from "react-router-dom";
 import logo from "../../images/logo.svg";
+import { NavLink } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useFormWithValidation } from "../../utils/useFormWithValidation";
+import { REGEXP_EMAIL } from "../../utils/constants";
 
+function AuthorizationUser ({ titleText, buttonText, path, handleUserData, serverError, onServerError, isLoading }) {
 
-function AuthorizationUser ({ titleText, buttonText, path }) {
-  function handleSubmit (e) {
+  const {
+    getValues,
+    register,
+    formState: { errors },
+  } = useForm({ mode: "onChange" });
+
+  const { formValues, handleChange, errorsMessages, isFormValid } = useFormWithValidation();
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
+    handleUserData({
+      userName: formValues['user-name'],
+      email: getValues('email'),
+      password: formValues['user-password'],
+    });
+  }
+
+  function validateForm(){
+    return (!isFormValid || !!(errors?.email)) || isLoading;
   }
 
   return (
@@ -20,8 +40,9 @@ function AuthorizationUser ({ titleText, buttonText, path }) {
           method="POST"
           className="authorization__form"
           onSubmit={handleSubmit}
+          noValidate
         >
-          <fieldset className="authorization__fieldset">
+          <fieldset className="authorization__fieldset" disabled={isLoading}>
             { path === "/signin" &&
               <>
                 <legend className="authorization__input-title">Имя</legend>
@@ -31,10 +52,13 @@ function AuthorizationUser ({ titleText, buttonText, path }) {
                     className="authorization__input authorization__input-name"
                     placeholder="Имя"
                     minLength="2"
-                    maxLength="40"
+                    maxLength="30"
                     required
+                    onChange={(e) => handleChange(e)}
                 />
-                <span className="authorization__error-message">Что-то пошло не так...</span>
+                <span className="authorization__error-message">
+                  {errorsMessages['user-name']}
+                  </span>
               </>
             }
             <legend className="authorization__input-title">E-mail</legend>
@@ -43,40 +67,60 @@ function AuthorizationUser ({ titleText, buttonText, path }) {
                 name="user-email"
                 className="authorization__input authorization__input-email"
                 placeholder="Почта"
-                minLength="2"
-                maxLength="40"
                 required
+                {...register('email', {
+                  required: "Email адрес обязательное поле",
+                  pattern: {
+                    value: REGEXP_EMAIL,
+                    message: 'Почта не соответствует требуемому формату <имя>@<домен>.<код страны>'
+                  }
+                })}
             />
-            <span className="authorization__error-message">Что-то пошло не так...</span>        
+            <span className="authorization__error-message">
+              {errors?.email && errors?.email?.message}
+            </span>        
             <legend className="authorization__input-title">Пароль</legend>
             <input
                 type="password"
                 name="user-password"
                 className="authorization__input authorization__input-password"
                 placeholder="Пароль"
-                minLength="6"
-                maxLength="200"
+                minLength="8"
+                maxLength="100"
                 required
+                onChange={(e) => handleChange(e)}
             />
-            <span className="authorization__error-message">Что-то пошло не так...</span>
+            <span className="authorization__error-message">
+              {errorsMessages['user-password']}
+            </span>
           </fieldset>
+          <span className="authorization__error-message authorization__error-message_center">{serverError}</span>
           <button
             type="submit"
-            className="authorization__button authorization__button_disabled"
-          >
+            disabled={validateForm()}
+            className={`authorization__button ${validateForm() ? 'authorization__button_disabled' : ''}`}
+            >
             {buttonText}
           </button>
         </form>
         { path === "/signin" &&
           <p className="authorization__text">
             Уже зарегистрированы?
-            <NavLink to={path} className="authorization__link">Войти</NavLink>
+            <NavLink
+              to={path}
+              className="authorization__link"
+              onClick={() => onServerError('')}
+            >Войти</NavLink>
           </p>
         }
         { path === "/signup" &&
           <p className="authorization__text">
             Ещё не зарегистрированы?
-            <NavLink to={path} className="authorization__link">Регистрация</NavLink>
+            <NavLink
+              to={path}
+              className="authorization__link"
+              onClick={() => onServerError('')}
+              >Регистрация</NavLink>
           </p>
         }
       </main>

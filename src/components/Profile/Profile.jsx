@@ -1,80 +1,121 @@
 import "./Profile.css";
-import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useContext } from 'react';
+import { useForm } from "react-hook-form";
 import { Header } from "../Header/Header";
+import { CurrentUserContext } from "../../context/CurrentUserContext";
+import { useFormWithValidation } from "../../utils/useFormWithValidation";
+import { REGEXP_EMAIL } from "../../utils/constants";
 
-function Profile () {
-  const [name, setName] = useState('Виталий');
-  const [email, setEmail] = useState('pochta@yandex.ru');
+
+function Profile ({ onSignOut, isLoggedIn, onUpdateUser, serverError, isLoading}) {
+
+  const currentUser = useContext(CurrentUserContext);
+
   const [isEditUser, setIsEditUser] = useState(false);
+  const [userName, setUserName] = useState('');
 
-  const navigate = useNavigate();
+  const {
+    getValues,
+    setValue,
+    register,
+    watch,
+    formState: { errors },
+  } = useForm({ mode: "onChange" });
 
-  function handleChangeName (e) {
-    setName(e.target.value);
-  }
+  const { formValues, handleChange, errorsMessages, isFormValid } = useFormWithValidation();
 
-  function handleChangeEmail (e) {
-    setEmail(e.target.value);
-  }
+  const watchEmail = watch('email');
 
+  useEffect(() => {
+    if (currentUser.name) {
+      setValue('email', currentUser.email);
+      setUserName(currentUser.name);
+    };
+  }, [currentUser, setValue]);
+  
   function handleIsEditUser () {
     setIsEditUser(true);
   }
 
+  function handleUserNameChange(e) {
+    setUserName(e.target.value);
+    handleChange(e);
+  }
+
   function handleSignOut () {
-    navigate("/signin");
+    onSignOut();
   }
 
   function handleSubmit (e) {
     e.preventDefault();
+    
+    onUpdateUser({
+      name: formValues['user-name'],
+      email: getValues('email'),
+    });
+  }
 
-    setIsEditUser(false);
+  function validateForm(){
+    return  ((userName === currentUser.name) && (watchEmail === currentUser.email)) || (!isFormValid || errors?.email);
   }
 
   return (
     <>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
       <main className="profile">
-        <h2 className="profile__header">Привет, Виталий!</h2>
+        <h2 className="profile__header">Привет, {currentUser.name}!</h2>
         <form
           name="profile-form"
           method="POST"
           className="profile__form"
           onSubmit={handleSubmit}
-          >
-          <fieldset className="profile__fieldset">
+          noValidate          
+        >
+          <fieldset className="profile__fieldset" disabled={!isEditUser || isLoading}>
             <div className="profile__data-box">
               <legend className="profile__input-title">Имя</legend>
               <input 
                   type="text"
                   name="user-name"
-                  value={name}
-                  onChange={handleChangeName}
                   className="profile__input profile__input-name"
                   placeholder="Имя"
-              />
+                  minLength="2"
+                  maxLength="30"
+                  required
+                  value={userName}
+                  onChange={handleUserNameChange}
+              ></input>
             </div>
+            <span className="profile__error-message">{errorsMessages['user-name']}</span>
+
             <span className="profile__border-element"></span>
             <div className="profile__data-box">
               <legend className="profile__input-title">E-mail</legend>
               <input
                   type="email"
                   name="user-email"
-                  value={email}
-                  onChange={handleChangeEmail}
                   className="profile__input profile__input-email"
                   placeholder="Почта"
+                  onChange={(e) => console.log(e)}
+                  required
+                  {...register('email', {
+                    required: "Email адрес обязательное поле",
+                    pattern: {
+                      value: REGEXP_EMAIL,
+                      message: 'Почта не соответствует требуемому формату <имя>@<домен>.<код страны>'
+                    }
+                  })}
               />
             </div>
+            <span className="profile__error-message">{errors?.email && errors?.email?.message}</span>
           </fieldset>
           { isEditUser ?
             <div>  
-              <span className="profile__error-message">При обновлении профиля произошла ошибка.</span>    
+              <span className="profile__error-message profile__error-message_position">{serverError}</span>    
               <button
                 type="submit"
-                className="profile__submit-button"
-                disabled={false}
+                disabled={validateForm() || isLoading}
+                className={`profile__submit-button ${(validateForm() || isLoading) ? 'profile__submit-button_disabled' : ''}`}
               >
                 Сохранить
               </button>

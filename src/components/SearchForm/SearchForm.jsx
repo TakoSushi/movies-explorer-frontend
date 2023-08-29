@@ -1,11 +1,16 @@
 import "./SearchForm.css";
-import { Switcher } from "../Switcher/Switcher";
+import { useRef } from "react";
 import magnifyingGlass from "../../images/left-pointing_magnifying_glass.svg";
+import { Switcher } from "../Switcher/Switcher";
 
-function SearchForm() {
-  function handleSubmit (e) {
+function SearchForm({ onSubmit, onChecked, isChecked, searchText}) {
+  
+  const searchInput = useRef("");
+
+  function handleSubmit(e) {
     e.preventDefault();
 
+    onSubmit(searchInput.current.value);
   }
 
   return (
@@ -22,6 +27,8 @@ function SearchForm() {
           alt="Лупа"
         />
         <input
+          ref={searchInput}
+          defaultValue={searchText || ""}
           className="searchform__input"
           name="search-input"
           type="text"
@@ -32,7 +39,12 @@ function SearchForm() {
           Найти
         </button>
         <div className="searchform__slice"></div>
-        <Switcher labelName={"Короткометражки"} className="searchform_switcher" />
+        <Switcher
+          labelName={"Короткометражки"}
+          className="searchform_switcher"
+          isChecked={isChecked}
+          onChecked={onChecked}
+        />
       </form>
     </section>
   );

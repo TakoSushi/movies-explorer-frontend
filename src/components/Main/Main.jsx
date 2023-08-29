@@ -8,10 +8,11 @@ import { Header } from "../Header/Header";
 import { Footer } from "../Footer/Footer";
 
 
-function Main() {
+function Main({ isLoggedIn }) {
+
   return (
     <>
-      <Header className={"header_colorize"} />
+      <Header className={"header_colorize"} isLoggedIn={isLoggedIn} />
       <main>
         <Promo />
         <AboutProject />

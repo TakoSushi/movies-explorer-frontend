@@ -2,17 +2,16 @@
   padding: 0 70px;
 }
 
-
 .movies__add-films-button {
   display: block;
   width: 320px;
   height: 36px;
   border: none;
   border-radius: 6px;
-  background: #2F2F2F;
+  background: #2f2f2f;
   padding: 0;
   margin: 50px auto 80px auto;
-  color: #FFF;
+  color: #fff;
   text-align: center;
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 12px;
@@ -27,10 +26,25 @@
   opacity: 0.8;
 }
 
+.movies__add-films-button_hidden {
+  display: none;
+}
+
+.movies__error-message {
+  color: #ee3465;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+  padding: 10px 150px;
+}
+
 @media (max-width: 1006px) {
   .movies {
     padding: 0 30px;
-  }  
+  }
 }
 
 @media (max-width: 760px) {
@@ -40,5 +54,10 @@
 
   .movies__add-films-button {
     width: 240px;
+  }
+
+  .movies__error-message {
+    font-size: 12px;
+    padding: 10px 35px;
   }
 }
