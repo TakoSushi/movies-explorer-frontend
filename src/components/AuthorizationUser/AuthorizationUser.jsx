@@ -3,17 +3,17 @@ import logo from "../../images/logo.svg";
 import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useFormWithValidation } from "../../utils/useFormWithValidation";
+import { REGEXP_EMAIL } from "../../utils/constants";
 
-function AuthorizationUser ({ titleText, buttonText, path, handleUserData, serverError, onServerError }) {
+function AuthorizationUser ({ titleText, buttonText, path, handleUserData, serverError, onServerError, isLoading }) {
 
   const {
     getValues,
     register,
     formState: { errors },
-    reset,
   } = useForm({ mode: "onChange" });
 
-  const { formValues, handleChange, errorsMessages, isFormValid, resetForm } = useFormWithValidation();
+  const { formValues, handleChange, errorsMessages, isFormValid } = useFormWithValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,9 +23,10 @@ function AuthorizationUser ({ titleText, buttonText, path, handleUserData, serve
       email: getValues('email'),
       password: formValues['user-password'],
     });
+  }
 
-    reset();
-    resetForm();
+  function validateForm(){
+    return (!isFormValid || !!(errors?.email)) || isLoading;
   }
 
   return (
@@ -41,7 +42,7 @@ function AuthorizationUser ({ titleText, buttonText, path, handleUserData, serve
           onSubmit={handleSubmit}
           noValidate
         >
-          <fieldset className="authorization__fieldset">
+          <fieldset className="authorization__fieldset" disabled={isLoading}>
             { path === "/signin" &&
               <>
                 <legend className="authorization__input-title">Имя</legend>
@@ -70,7 +71,7 @@ function AuthorizationUser ({ titleText, buttonText, path, handleUserData, serve
                 {...register('email', {
                   required: "Email адрес обязательное поле",
                   pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
+                    value: REGEXP_EMAIL,
                     message: 'Почта не соответствует требуемому формату <имя>@<домен>.<код страны>'
                   }
                 })}
@@ -96,8 +97,8 @@ function AuthorizationUser ({ titleText, buttonText, path, handleUserData, serve
           <span className="authorization__error-message authorization__error-message_center">{serverError}</span>
           <button
             type="submit"
-            disabled={!isFormValid}
-            className={`authorization__button ${!isFormValid ? 'authorization__button_disabled' : ''}`}
+            disabled={validateForm()}
+            className={`authorization__button ${validateForm() ? 'authorization__button_disabled' : ''}`}
             >
             {buttonText}
           </button>

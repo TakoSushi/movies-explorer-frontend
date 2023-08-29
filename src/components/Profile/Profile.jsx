@@ -4,32 +4,42 @@ import { useForm } from "react-hook-form";
 import { Header } from "../Header/Header";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { useFormWithValidation } from "../../utils/useFormWithValidation";
+import { REGEXP_EMAIL } from "../../utils/constants";
 
 
-function Profile ({ onSignOut, isLoggedIn, onUpdateUser, serverError, onServerError}) {
+function Profile ({ onSignOut, isLoggedIn, onUpdateUser, serverError, isLoading}) {
 
   const currentUser = useContext(CurrentUserContext);
 
   const [isEditUser, setIsEditUser] = useState(false);
+  const [userName, setUserName] = useState('');
 
   const {
     getValues,
     setValue,
     register,
+    watch,
     formState: { errors },
-    reset,
   } = useForm({ mode: "onChange" });
 
-  const { formValues, handleChange, errorsMessages, isFormValid, resetForm } = useFormWithValidation();
+  const { formValues, handleChange, errorsMessages, isFormValid } = useFormWithValidation();
 
-  useEffect(() => { 
+  const watchEmail = watch('email');
+
+  useEffect(() => {
     if (currentUser.name) {
       setValue('email', currentUser.email);
+      setUserName(currentUser.name);
     };
-  }, [currentUser, setValue, resetForm]);
+  }, [currentUser, setValue]);
   
   function handleIsEditUser () {
     setIsEditUser(true);
+  }
+
+  function handleUserNameChange(e) {
+    setUserName(e.target.value);
+    handleChange(e);
   }
 
   function handleSignOut () {
@@ -40,23 +50,13 @@ function Profile ({ onSignOut, isLoggedIn, onUpdateUser, serverError, onServerEr
     e.preventDefault();
     
     onUpdateUser({
-      userName: formValues['user-name'],
+      name: formValues['user-name'],
       email: getValues('email'),
     });
-
-    reset();
-    resetForm();
   }
 
   function validateForm(){
-    const newUserName = formValues['user-name'];
-    const currentUserName = currentUser.name;
-    const newUserEmail = getValues('email');
-    const currentUserEmail = currentUser.email;
-    
-    return  ((newUserEmail === currentUserEmail) && (newUserName === currentUserName)) ||
-              (!isFormValid || errors?.email) ? 
-              true : false;
+    return  ((userName === currentUser.name) && (watchEmail === currentUser.email)) || (!isFormValid || errors?.email);
   }
 
   return (
@@ -69,9 +69,9 @@ function Profile ({ onSignOut, isLoggedIn, onUpdateUser, serverError, onServerEr
           method="POST"
           className="profile__form"
           onSubmit={handleSubmit}
-          noValidate
+          noValidate          
         >
-          <fieldset className="profile__fieldset">
+          <fieldset className="profile__fieldset" disabled={!isEditUser || isLoading}>
             <div className="profile__data-box">
               <legend className="profile__input-title">Имя</legend>
               <input 
@@ -82,8 +82,8 @@ function Profile ({ onSignOut, isLoggedIn, onUpdateUser, serverError, onServerEr
                   minLength="2"
                   maxLength="30"
                   required
-                  defaultValue={currentUser.name}
-                  onChange={(e) => handleChange(e)}
+                  value={userName}
+                  onChange={handleUserNameChange}
               ></input>
             </div>
             <span className="profile__error-message">{errorsMessages['user-name']}</span>
@@ -96,11 +96,12 @@ function Profile ({ onSignOut, isLoggedIn, onUpdateUser, serverError, onServerEr
                   name="user-email"
                   className="profile__input profile__input-email"
                   placeholder="Почта"
+                  onChange={(e) => console.log(e)}
                   required
                   {...register('email', {
                     required: "Email адрес обязательное поле",
                     pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
+                      value: REGEXP_EMAIL,
                       message: 'Почта не соответствует требуемому формату <имя>@<домен>.<код страны>'
                     }
                   })}
@@ -113,8 +114,8 @@ function Profile ({ onSignOut, isLoggedIn, onUpdateUser, serverError, onServerEr
               <span className="profile__error-message profile__error-message_position">{serverError}</span>    
               <button
                 type="submit"
-                disabled={validateForm()}
-                className={`profile__submit-button ${validateForm() ? 'profile__submit-button_disabled' : ''}`}
+                disabled={validateForm() || isLoading}
+                className={`profile__submit-button ${(validateForm() || isLoading) ? 'profile__submit-button_disabled' : ''}`}
               >
                 Сохранить
               </button>

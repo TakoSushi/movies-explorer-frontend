@@ -1,4 +1,16 @@
 import { useState, useEffect } from "react";
+import {
+  DISPLAY_WIDTH_LARGE,
+  DISPLAY_WIDTH_MEDIUM,
+  DISPLAY_WIDTH_SHORT,
+  DISPLAY_MOVIES_MAX,
+  DISPLAY_MOVIES_LARGE,
+  DISPLAY_MOVIES_MEDIUM,
+  DISPLAY_MOVIES_SHORT,
+  MOVIES_ADD_MAX,
+  MOVIES_ADD_LARGE,
+  MOVIES_ADD_MEDIUM,
+} from "./constants";
 
 function useMoviesViewCounter() {
     const [moviesCounter, setMoviesCounter] = useState({});
@@ -17,28 +29,28 @@ function useMoviesViewCounter() {
       window.addEventListener('resize', handleWindowResize);
   
       return () => {
-        window.addEventListener('resize', handleWindowResize);
+        window.removeEventListener('resize', handleWindowResize);
       };
     }, [])
   
     useEffect(() => {
-      if(windowSize.innerWidth > 1278 ) {
-        const displayMovies = 16;
-        const addMovies = 4;
+      if(windowSize.innerWidth > DISPLAY_WIDTH_LARGE ) {
+        const displayMovies = DISPLAY_MOVIES_MAX;
+        const addMovies = MOVIES_ADD_MAX;
         setMoviesCounter({ displayMovies, addMovies });
       } else {
-        if(windowSize.innerWidth > 1006 ) {
-          const displayMovies = 12;
-          const addMovies = 3;
+        if(windowSize.innerWidth > DISPLAY_WIDTH_MEDIUM ) {
+          const displayMovies = DISPLAY_MOVIES_LARGE;
+          const addMovies = MOVIES_ADD_LARGE;
           setMoviesCounter({ displayMovies, addMovies });
         } else {
-          if (windowSize.innerWidth > 760 ) {
-            const displayMovies = 8;
-            const addMovies = 2;
+          if (windowSize.innerWidth > DISPLAY_WIDTH_SHORT ) {
+            const displayMovies = DISPLAY_MOVIES_MEDIUM;
+            const addMovies = MOVIES_ADD_MEDIUM;
             setMoviesCounter({ displayMovies, addMovies });
           } else {
-            const displayMovies = 5;
-            const addMovies = 2;
+            const displayMovies = DISPLAY_MOVIES_SHORT;
+            const addMovies = MOVIES_ADD_MEDIUM;
             setMoviesCounter({ displayMovies, addMovies });
           }
         }

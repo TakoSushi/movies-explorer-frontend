@@ -1,5 +1,5 @@
 import "./Movies.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { SearchForm } from "../SearchForm/SearchForm";
 import { MoviesCardList } from "../MoviesCardList/MoviesCardList";
 import { Header } from "../Header/Header";
@@ -7,36 +7,37 @@ import { Navigation } from "../Navigation/Navigation";
 import { MovieCard } from "../MovieCard/MovieCard";
 import { Footer } from "../Footer/Footer";
 import { useMoviesViewCounter } from "../../utils/useMoviesViewCounter";
-import { getLocalData } from "../../utils/useLocalStorage";
+import { setLocalData, getLocalData } from "../../utils/useLocalStorage";
 import filterFilms from "../../utils/filterFilms";
 
 
 function Movies({ isLoggedIn, initialMovies, myMovies, onSubmit, onClickCardLike}) {
 
-  const [filterMovies, setFilterMovies] = useState([]);
+
+  console.log(getLocalData('filterMovies'))
+  const [filterMovies, setFilterMovies] = useState(getLocalData('filterMovies')
+  ? getLocalData('filterMovies') : []);
   const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [moviesCounter, setMoviesCounter] = useMoviesViewCounter();
+  const [searchText, setSearchText] = useState(getLocalData('searchData')
+  ? getLocalData('searchData').searchText || ''
+  : '');
+  const [isChecked, setIsChecked] = useState(getLocalData('searchData')
+  ? getLocalData('searchData').isChecked || false
+  : false);
 
-  useEffect(() => {
-    if(initialMovies.length){
-    setFilterMovies(filterFilms(
-      initialMovies,
-      getLocalData('movies') || {searchText: "", isChecked: false}
-    ));
-    setIsLoading(false);
-    }
-  }, [initialMovies]);
-
-  function handleSearchSubmit() {
-
+  function handleSearchSubmit(searchText) {
+    
+    setSearchText(searchText)
+    
     if(!initialMovies.length){
       setIsLoading(true);
 
       onSubmit().then((initialMovies) => {
           setFilterMovies(filterFilms(
             initialMovies,
-            getLocalData('movies')
+            getLocalData('searchData')
           ));
         })
         .catch((err) => {
@@ -47,16 +48,38 @@ function Movies({ isLoggedIn, initialMovies, myMovies, onSubmit, onClickCardLike
     } else {
       setFilterMovies(filterFilms(
         initialMovies,
-        getLocalData('movies')
+        {
+          isChecked: isChecked,
+          searchText: searchText
+        }
       ));
     }
+    
+    setLocalData('searchData', {
+      'isChecked': isChecked,
+      'searchText': searchText
+    });
+
+    setLocalData('filterMovies', filterMovies);
   }
 
-  function handleChecked() {
+  function handleChecked(isChecked) {
+    setIsChecked(isChecked)
+
     setFilterMovies(filterFilms(
       initialMovies,
-      getLocalData('movies')
+      {
+        isChecked: isChecked,
+        searchText: searchText
+      }
     ));
+
+    setLocalData('searchData', {
+      'isChecked': isChecked,
+      'searchText': searchText
+    });
+
+    setLocalData('filterMovies', filterMovies);
   }
 
   function handleAddBtnClick () {
@@ -64,6 +87,8 @@ function Movies({ isLoggedIn, initialMovies, myMovies, onSubmit, onClickCardLike
     const displayMovies = moviesCounter.displayMovies + addMovies;
     setMoviesCounter({ displayMovies, addMovies })
   }
+
+  console.log(filterMovies);
 
   return (
     <>
@@ -74,7 +99,8 @@ function Movies({ isLoggedIn, initialMovies, myMovies, onSubmit, onClickCardLike
         <SearchForm
           onSubmit={handleSearchSubmit}
           onChecked={handleChecked}
-          localStorageKey={'movies'}
+          isChecked={isChecked}
+          searchText={searchText}
         />
         <MoviesCardList
           movies={(filterMovies)}

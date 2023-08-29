@@ -1,41 +1,16 @@
 import "./SearchForm.css";
-import { useState } from "react";
+import { useRef } from "react";
 import magnifyingGlass from "../../images/left-pointing_magnifying_glass.svg";
 import { Switcher } from "../Switcher/Switcher";
-import { setLocalData, getLocalData } from "../../utils/useLocalStorage";
 
-
-function SearchForm({ onSubmit, onChecked, localStorageKey}) {
-  const [searchText, setSearchText] = useState(getLocalData(localStorageKey)
-  ? getLocalData(localStorageKey).searchText || ''
-  : '');
-  const [isChecked, setIsChecked] = useState(getLocalData(localStorageKey)
-  ? getLocalData(localStorageKey).isChecked || false
-  : false);
-
-  function handleChangeSearchText(e) {
-    setSearchText(e.target.value);
-  }
-
-  function handleChecked(isChecked) {
-    setLocalData(localStorageKey, {
-      ...getLocalData(localStorageKey),
-      'isChecked': isChecked
-    });
-
-    setIsChecked(isChecked);
-    onChecked();
-  }
+function SearchForm({ onSubmit, onChecked, isChecked, searchText}) {
+  
+  const searchInput = useRef("");
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    setLocalData(localStorageKey, {
-      ...getLocalData(localStorageKey),
-      'searchText': searchText
-    });
-
-    onSubmit();
+    onSubmit(searchInput.current.value);
   }
 
   return (
@@ -52,8 +27,8 @@ function SearchForm({ onSubmit, onChecked, localStorageKey}) {
           alt="Лупа"
         />
         <input
-          value={searchText}
-          onChange={handleChangeSearchText}
+          ref={searchInput}
+          defaultValue={searchText || ""}
           className="searchform__input"
           name="search-input"
           type="text"
@@ -68,7 +43,7 @@ function SearchForm({ onSubmit, onChecked, localStorageKey}) {
           labelName={"Короткометражки"}
           className="searchform_switcher"
           isChecked={isChecked}
-          onChecked={handleChecked}
+          onChecked={onChecked}
         />
       </form>
     </section>

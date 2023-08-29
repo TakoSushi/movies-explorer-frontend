@@ -1,9 +1,12 @@
+import { SHORT_FiLM_DURATION } from "./constants";
+
 export default function filterFilms(movies, { searchText, isChecked }) {
+
   
   let filtredMovies = movies;
 
   if (isChecked){
-    filtredMovies = filtredMovies.filter((movie) => movie.duration <= 40);
+    filtredMovies = filtredMovies.filter((movie) => movie.duration <= SHORT_FiLM_DURATION);
   }
 
   if (!searchText) {

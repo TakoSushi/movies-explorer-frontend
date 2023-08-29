@@ -6,31 +6,42 @@ import { Header } from "../Header/Header";
 import { Navigation } from "../Navigation/Navigation";
 import { MovieCard } from "../MovieCard/MovieCard";
 import { Footer } from "../Footer/Footer";
-import { getLocalData } from "../../utils/useLocalStorage";
 import filterFilms from "../../utils/filterFilms"
 
 function SavedMovies({ isLoggedIn, onClickCardLike, myMovies }) {
-  
-  const [filterMovies, setisFilterMovies] = useState (myMovies)
 
-  useEffect(() => {
-      setisFilterMovies(filterFilms(
-        myMovies,
-        getLocalData('myMovies') || {searchText: "", isChecked: false}
-      ));
-  }, [myMovies]);
+  const [filterMovies, setFilterMovies] = useState (myMovies);
+  const [searchText, setSearchText] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
 
-  function handleChecked() {
-    setisFilterMovies(filterFilms(
+  useEffect(() => setFilterMovies(filterFilms(
       myMovies,
-      getLocalData('myMovies')
+      {
+        isChecked: false,
+        searchText: ""
+      }
+  )), [myMovies]);
+
+  function handleChecked(isChecked) {
+    setIsChecked(isChecked)
+
+    setFilterMovies(filterFilms(
+      myMovies,
+      {
+        isChecked: isChecked,
+        searchText: searchText
+      }
     ));
   }
 
-  function handleSearchSubmit() {
-    setisFilterMovies(filterFilms(
+  function handleSearchSubmit(searchText) {
+    setSearchText(searchText)
+    setFilterMovies(filterFilms(
       myMovies,
-      getLocalData('myMovies')
+      {
+        isChecked: isChecked,
+        searchText: searchText
+      }
     ));
   }
 
@@ -44,7 +55,7 @@ function SavedMovies({ isLoggedIn, onClickCardLike, myMovies }) {
         <SearchForm 
           onSubmit={handleSearchSubmit}
           onChecked={handleChecked}
-          localStorageKey={'myMovies'}
+          isChecked={isChecked}
         />
         <MoviesCardList movies={myMovies}>
           {(filterMovies).map((movie) => {

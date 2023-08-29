@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { ProtectedRoute } from '../../components/ProtectedRoute/ProtectedRoute';
 import { Preloader } from "../Preloader/Preloader";
@@ -23,6 +23,7 @@ function App() {
   const [serverError, setServerError] = useState('');
   const [myMovies, setMyMovies] = useState([]);
   const [initialMovies, setInitialMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ function App() {
       .catch( (err) => console.warn(err));
     }
   }, [isLoggedIn]);
-  
+
   useEffect( () => {
     handleAutoSignIn();
   }, []);
@@ -58,6 +59,8 @@ function App() {
   }
 
   function handleUserRegisterSubmit({ userName, email, password }) {
+    setIsLoading(true);
+
     const newUserData = {
       name: userName,
       email: email,
@@ -75,10 +78,13 @@ function App() {
       setLoggedIn(false);
       setServerError(err)
       console.warn(err);
-    });
+    })
+    .finally(() => setIsLoading(false));
   }
 
   function handleUserLoginSubmit({ email, password }) {
+    setIsLoading(true);
+
     const userData = {
       email: email,
       password: password
@@ -93,7 +99,7 @@ function App() {
       setServerError(err)
       console.warn(err);
     })
-
+    .finally(() => setIsLoading(false));
   }
 
   function handleSignOutSubmit() {
@@ -115,14 +121,18 @@ function App() {
   }
 
   function handleUpdateUser(newUserData) {
+    setIsLoading(true);
+    
     userApi.changeUserData(newUserData)
-    .then( () => {
-      setCurrentUser({newUserData});
+    .then( (newUserData) => {
+      setCurrentUser({...newUserData});
+      setServerError('Аккаунт успешно изменен');
     })
     .catch(err => {
       setServerError(err);
       console.warn(err);
     })
+    .finally(() => setIsLoading(false));
   }
   
 
@@ -178,7 +188,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Routes>
-          <Route path='/' element={<ProtectedRoute element={Main} isLoggedIn={isLoggedIn} />} />
+          <Route path='/' element={<Main isLoggedIn={isLoggedIn} />} />
           <Route path='movies' element={<ProtectedRoute
             element={Movies}
             isLoggedIn={isLoggedIn}
@@ -197,20 +207,29 @@ function App() {
             isLoggedIn={isLoggedIn}
             onSignOut={handleSignOutSubmit}
             onUpdateUser={handleUpdateUser}
-            onServerError={handleServerError}
             serverError={serverError}
+            isLoading={isLoading}
           />} />
 
-          <Route path='signin' element={<Login
-            onLoginUser={handleUserLoginSubmit}
-            serverError={serverError}
-            onServerError={handleServerError}
-          />} />
-          <Route path='signup' element={<Register
-            onRegisterUser={handleUserRegisterSubmit}
-            serverError={serverError}
-            onServerError={handleServerError}
-          />} />
+          <Route path='signin' element={isLoggedIn
+            ? <Navigate to='/' />
+            : <Login
+                onLoginUser={handleUserLoginSubmit}
+                serverError={serverError}
+                onServerError={handleServerError}
+                isLoading={isLoading}
+              />
+          } />
+
+          <Route path='signup' element={isLoggedIn
+            ? <Navigate to='/' />
+            : <Register
+                onRegisterUser={handleUserRegisterSubmit}
+                serverError={serverError}
+                onServerError={handleServerError}
+                isLoading={isLoading}
+              />
+          } />
 
           <Route path='*' element={<NotFoundPage />} />
         </Routes>

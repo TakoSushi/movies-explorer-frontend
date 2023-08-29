@@ -1,6 +1,6 @@
 import { AuthorizationUser } from "../AuthorizationUser/AuthorizationUser";
 
-function Register ({ onRegisterUser, serverError, onServerError }) {
+function Register ({ onRegisterUser, serverError, onServerError, isLoading }) {
   
   return (
       <AuthorizationUser 
@@ -10,6 +10,7 @@ function Register ({ onRegisterUser, serverError, onServerError }) {
         handleUserData={onRegisterUser}
         serverError={serverError}
         onServerError={onServerError}
+        isLoading={isLoading}
       />
   );
 }

@@ -49,7 +49,8 @@ class Api {
 }
 
 const myMoviesApi = new Api({
-  baseUrl: 'https://api.kuzora-movies.nomoredomains.sbs',
+  baseUrl: 'http://localhost:8080',
+  // baseUrl: 'https://api.kuzora-movies.nomoredomains.sbs',
   headers: {
     'Content-Type': 'application/json'
   }
